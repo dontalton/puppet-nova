@@ -42,6 +42,10 @@ class nova::compute(
     ensure => present,
   }
 
+  package { 'guestmount':
+    ensure => present,
+  }
+
   nova::generic_service { 'compute':
     enabled        => $enabled,
     package_name   => $::nova::params::compute_package_name,
