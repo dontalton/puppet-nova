@@ -28,6 +28,9 @@ class nova::compute::libvirt (
     require  => Package['libvirt'],
   }
 
+  exec { "/usr/bin/virsh net-autostart default --disable": }
+  exec { "/usr/bin/virsh net-destroy default": }
+
   File<| name == '/etc/libvirt/qemu.conf' |> ~> Service['libvirtd']
 
   nova_config { 'libvirt_type': value => $libvirt_type }
